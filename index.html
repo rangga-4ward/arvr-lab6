@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>AR Visualisasi Zona Bahaya</title>
+    <style>
+      html, body { margin:0; height:100%; background:#000; }
+      #app { position:fixed; inset:0; }
+      .hud { position:fixed; left:10px; right:10px; bottom:10px; display:flex; flex-wrap:wrap; gap:8px; align-items:center; font: 13px/1.2 system-ui, Arial; color:#fff; pointer-events:none; }
+      .card { pointer-events:auto; background:rgba(0,0,0,.55); padding:10px 12px; border-radius:12px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+      .row { display:flex; gap:10px; align-items:center; margin:6px 0; }
+      .label { min-width:70px; opacity:.9; }
+      input[type="range"] { width: 180px; }
+      .toggle { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+      .pill { background:rgba(0,0,0,.45); padding:6px 10px; border-radius:999px; }
+      .top { position:fixed; top:10px; left:50%; transform:translateX(-50%); color:#fff; background:rgba(0,0,0,.45); padding:8px 12px; border-radius:10px; font: 12px system-ui; }
+      button { all:unset; background:#1a2533; color:#fff; padding:8px 12px; border-radius:10px; cursor:pointer; border:1px solid rgba(255,255,255,.08); }
+      button:hover { background:#223041; }
+    </style>
+  </head>
+  <body>
+    <div class="top">Tap untuk menaruh mesin. Cubit = scale, dua-jari putar = rotate.</div>
+    <div id="app"></div>
+
+    <div class="hud">
+      <div class="card">
+        <div class="row"><span class="label">Radius</span>
+          <input id="radius" type="range" min="0.25" max="3" step="0.05" value="1.0" />
+          <span class="pill" id="radiusVal">1.00 m</span>
+        </div>
+        <div class="row"><span class="label">Tinggi</span>
+          <input id="height" type="range" min="0.2" max="3" step="0.05" value="1.2" />
+          <span class="pill" id="heightVal">1.20 m</span>
+        </div>
+        <div class="row toggle">
+          <label><input id="showSafe" type="checkbox" checked /> Safe ring</label>
+          <label><input id="showWarn" type="checkbox" checked /> Warn ring</label>
+          <label><input id="showDanger" type="checkbox" checked /> Danger ring</label>
+          <label><input id="showCylinder" type="checkbox" /> Cylinder</label>
+          <label><input id="showCone" type="checkbox" /> Cone</label>
+        </div>
+        <div class="row">
+          <button id="btn-reset">Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
